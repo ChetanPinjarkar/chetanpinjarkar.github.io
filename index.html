@@ -1,115 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chetan Pinjarkar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-            color: #333;
-        }
-        h1, h2 {
-            color: #0056b3;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-        .contact-info {
-            margin-bottom: 10px;
-        }
-        .contact-info a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chetan Pinjarkar — SRE & Cloud Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#0e1117; --bg2:#151b25; --bg3:#1c2433; --border:#252e3f;
+      --accent:#4f9cf9; --adim:rgba(79,156,249,0.12);
+      --green:#34d399; --orange:#fb923c;
+      --text:#f1f5f9; --body:#94a3b8; --muted:#4b5869;
+      --mono:'IBM Plex Mono',monospace; --sans:'Plus Jakarta Sans',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5vw;border-bottom:1px solid var(--border);background:rgba(14,17,23,0.9);backdrop-filter:blur(12px)}
+    .nav-logo{font-family:var(--mono);font-size:.82rem;color:var(--accent);letter-spacing:.04em}
+    .nav-logo span{color:var(--muted)}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:var(--mono);font-size:.72rem;color:var(--body);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .15s}
+    .nav-links a:hover{color:var(--text)}
+
+    .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 5vw 4rem;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(79,156,249,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,156,249,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 20% 50%,black,transparent);mask-image:radial-gradient(ellipse 70% 70% at 20% 50%,black,transparent)}
+    .hero-content{position:relative;z-index:1;max-width:800px}
+
+    .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .75rem;border-radius:20px;background:var(--adim);border:1px solid rgba(79,156,249,.25);font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.06em;margin-bottom:1.6rem;opacity:0;animation:fadeUp .5s ease .1s forwards}
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+
+    .hero-name{font-size:clamp(3.5rem,9vw,7rem);font-weight:800;line-height:1.0;letter-spacing:-.04em;color:var(--text);margin-bottom:.5rem;opacity:0;animation:fadeUp .5s ease .25s forwards}
+    .hero-name .first{display:block;color:var(--text)}
+    .hero-name .last{display:block;color:var(--accent)}
+
+    .hero-tagline{font-family:var(--mono);font-size:clamp(.8rem,1.5vw,.95rem);color:var(--body);margin-bottom:1.4rem;letter-spacing:.02em;opacity:0;animation:fadeUp .5s ease .4s forwards}
+    .hero-tagline .hl{color:var(--green)}
+
+    .hero-desc{font-size:1rem;color:var(--body);line-height:1.75;max-width:520px;margin-bottom:2.2rem;opacity:0;animation:fadeUp .5s ease .55s forwards}
+    .hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;opacity:0;animation:fadeUp .5s ease .7s forwards}
+
+    .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:6px;font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;text-decoration:none;transition:all .18s;cursor:pointer;border:none}
+    .btn-primary{background:var(--accent);color:#0a0f1a;font-weight:700}
+    .btn-primary:hover{background:#6babfa;transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,156,249,.28)}
+    .btn-outline{background:transparent;color:var(--body);border:1px solid var(--border)}
+    .btn-outline:hover{border-color:var(--accent);color:var(--text);transform:translateY(-2px)}
+
+    .hero-stats{position:absolute;right:5vw;bottom:4rem;display:flex;gap:2.5rem;opacity:0;animation:fadeUp .5s ease .85s forwards}
+    .stat-num{font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+    .stat-label{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-top:.1rem}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+    section{padding:5rem 5vw;border-top:1px solid var(--border)}
+    .sec-label{display:flex;align-items:center;gap:.8rem;margin-bottom:3rem}
+    .sec-num{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.08em}
+    .sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-.02em;color:var(--text)}
+    .sec-rule{flex:1;height:1px;background:var(--border);max-width:160px}
+
+    .terminal{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;max-width:660px}
+    .term-bar{background:var(--bg3);padding:.55rem 1rem;display:flex;align-items:center;gap:.45rem;border-bottom:1px solid var(--border)}
+    .dot{width:10px;height:10px;border-radius:50%}.dr{background:#ff5f57}.dy{background:#febc2e}.dg{background:#28c840}
+    .term-title{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin:0 auto}
+    .term-body{padding:1.25rem 1.5rem;font-family:var(--mono);font-size:.78rem;line-height:2}
+    .tp{color:var(--green)}.tc{color:var(--text)}.tk{color:var(--accent)}.tv{color:#cbd5e1}.tm{color:var(--muted)}
+
+    .exp-item{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--border);padding:2.5rem 0;gap:2rem}
+    .exp-period{font-family:var(--mono);font-size:.7rem;color:var(--accent);margin-bottom:.35rem;letter-spacing:.04em}
+    .exp-company{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+    .exp-type{font-family:var(--mono);font-size:.65rem;color:var(--muted)}
+    .exp-role{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:1rem;letter-spacing:-.01em}
+    .exp-role em{color:var(--accent);font-style:normal}
+    .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .exp-bullets li{font-size:.875rem;color:var(--body);line-height:1.65;padding-left:1.1rem;position:relative}
+    .exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent);font-size:1rem;line-height:1.5}
+
+    .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+    .tag{font-family:var(--mono);font-size:.65rem;padding:.22rem .6rem;border-radius:3px;letter-spacing:.03em}
+    .tb{background:rgba(79,156,249,.1);color:#7ab8fb;border:1px solid rgba(79,156,249,.2)}
+    .tg{background:rgba(52,211,153,.1);color:#5dddb0;border:1px solid rgba(52,211,153,.2)}
+    .to{background:rgba(251,146,60,.1);color:#fba96a;border:1px solid rgba(251,146,60,.2)}
+
+    .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+    .proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.6rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+    .proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--green));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+    .proj-card:hover{border-color:#2d3a50;transform:translateY(-3px)}
+    .proj-card:hover::before{transform:scaleX(1)}
+    .proj-cloud{font-family:var(--mono);font-size:.63rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem}
+    .proj-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.65rem;line-height:1.35}
+    .proj-desc{font-size:.83rem;color:var(--body);line-height:1.65;margin-bottom:1rem}
+    .proj-impact{font-family:var(--mono);font-size:.72rem;color:var(--green);padding:.35rem .7rem;background:rgba(52,211,153,.07);border-left:2px solid var(--green);margin-bottom:1rem;border-radius:0 3px 3px 0}
+
+    .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.1rem}
+    .skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.3rem;transition:border-color .2s}
+    .skill-card:hover{border-color:#2d3a50}
+    .skill-cat{font-family:var(--mono);font-size:.65rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.7rem}
+    .skill-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+    .skill-pill{font-family:var(--mono);font-size:.7rem;padding:.18rem .55rem;background:var(--bg3);border:1px solid var(--border);border-radius:3px;color:var(--body)}
+
+    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+    .contact-intro{font-size:.975rem;color:var(--body);line-height:1.8;margin-bottom:1.5rem}
+    .clinks{display:flex;flex-direction:column;gap:.8rem}
+    .clink{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:border-color .18s,transform .18s}
+    .clink:hover{border-color:var(--accent);transform:translateX(4px)}
+    .clink-icon{font-size:1rem;width:26px;text-align:center}
+    .clink-label{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;display:block}
+    .clink-val{font-size:.875rem;color:var(--text)}
+    .clink-arrow{color:var(--muted);margin-left:auto;transition:color .18s,transform .18s}
+    .clink:hover .clink-arrow{color:var(--accent);transform:translateX(3px)}
+
+    footer{border-top:1px solid var(--border);padding:1.8rem 5vw;display:flex;justify-content:space-between;align-items:center}
+    footer p{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+    footer p span{color:var(--accent)}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+    @media(max-width:720px){
+      nav{padding:.9rem 1.2rem}.nav-links{display:none}
+      .hero{padding:5rem 1.2rem 2rem}.hero-stats{display:none}
+      section{padding:3rem 1.2rem}
+      .exp-item{grid-template-columns:1fr}
+      .contact-wrap{grid-template-columns:1fr;gap:2rem}
+      footer{flex-direction:column;gap:.4rem;text-align:center;padding:1.2rem}
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Chetan Pinjarkar</h1>
-        <div class="contact-info">
-            <p>Email: <a href="mailto:chetanpinjarkar@gmail.com">chetanpinjarkar@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/chetan-pinjarkar-b1253335/" target="_blank">linkedin.com/in/chetan-pinjarkar</a></p>
+
+<nav>
+  <div class="nav-logo">CP<span>://</span>portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="about" style="border-top:none;">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Available for opportunities</div>
+    <h1 class="hero-name">
+      <span class="first">Chetan</span>
+      <span class="last">Pinjarkar</span>
+    </h1>
+    <p class="hero-tagline">
+      <span class="hl">Site Reliability Engineer</span>&nbsp;&nbsp;·&nbsp;&nbsp;Cloud &amp; DevOps&nbsp;&nbsp;·&nbsp;&nbsp;Python Automation
+    </p>
+    <p class="hero-desc">
+      6+ years building scalable cloud infrastructure, event-driven architectures, and automation
+      platforms across AWS and Azure. Passionate about reliability, IaC, and eliminating toil.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get in touch →</a>
+      <a href="#experience" class="btn btn-outline">View experience</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Years Exp.</div></div>
+    <div class="stat"><div class="stat-num">40%</div><div class="stat-label">Workload Cut</div></div>
+    <div class="stat"><div class="stat-num">50%</div><div class="stat-label">Faster Deploy</div></div>
+  </div>
+</section>
+
+<div style="padding:0 5vw 4rem" class="reveal">
+  <div class="terminal">
+    <div class="term-bar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><div class="term-title">chetan@cloud ~ about.json</div></div>
+    <div class="term-body">
+      <div><span class="tp">$ </span><span class="tc">cat about.json</span></div>
+      <div class="tm">{</div>
+      <div>&nbsp;&nbsp;<span class="tk">"role"</span>: <span class="tv">"Site Reliability Engineer"</span>,</div>
+      <div>&nbsp;&nbsp;<span class="tk">"cloud"</span>: <span class="tv">["AWS", "Azure", "GCP", "OpenStack"]</span>,</div>
+      <div>&nbsp;&nbsp;<span class="tk">"core"</span>: <span class="tv">["Python", "Terraform", "Kubernetes", "Docker"]</span>,</div>
+      <div>&nbsp;&nbsp;<span class="tk">"edu"</span>: <span class="tv">"B.E. CSE · Sant Gadge Baba Amravati University"</span>,</div>
+      <div>&nbsp;&nbsp;<span class="tk">"email"</span>: <span class="tv">"chetanpinjarkar@gmail.com"</span>,</div>
+      <div>&nbsp;&nbsp;<span class="tk">"status"</span>: <span style="color:var(--green)">"open_to_work"</span></div>
+      <div class="tm">}</div>
+      <div style="margin-top:.3rem"><span class="tp">$ </span><span class="tc" style="animation:blink 1s step-end infinite">_</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="sec-label reveal"><span class="sec-num">01 /</span><h2 class="sec-title">Experience</h2><div class="sec-rule"></div></div>
+
+  <div class="reveal"><div class="exp-item">
+    <div><div class="exp-period">Apr 2025 – Present</div><div class="exp-company">Sandhata Technologies</div><div class="exp-type">Full-time</div></div>
+    <div>
+      <div class="exp-role">Site Reliability <em>Engineer</em></div>
+      <ul class="exp-bullets">
+        <li>Built microservices using Azure Functions (Python) with Azure Service Bus, Logic Apps, Blob Storage, and Key Vault for secure event-driven processing.</li>
+        <li>Designed event-driven cloud architecture delivering scalable automated workflows with improved fault tolerance via async messaging.</li>
+        <li>Provisioned and managed AWS infrastructure using Terraform IaC — EC2, S3, VPC, Lambda, RDS, and IAM across multi-environment setups.</li>
+        <li>Automated EC2 shutdown via Lambda + EventBridge with SNS alerts, cutting compute costs measurably.</li>
+        <li>Implemented logging, monitoring, and retry mechanisms to enhance observability and workflow reliability.</li>
+        <li>Leveraged GitHub Copilot in VS Code for AI-assisted development and faster delivery cycles.</li>
+      </ul>
+      <div class="tags"><span class="tag tb">Azure Functions</span><span class="tag tb">Service Bus</span><span class="tag tb">Key Vault</span><span class="tag tg">Terraform</span><span class="tag tg">AWS Lambda</span><span class="tag tg">Python</span><span class="tag to">EventBridge</span></div>
+    </div>
+  </div></div>
+
+  <div class="reveal"><div class="exp-item">
+    <div><div class="exp-period">Sep 2022 – Mar 2025</div><div class="exp-company">Jio Platforms Ltd</div><div class="exp-type">Full-time</div></div>
+    <div>
+      <div class="exp-role">Software Development <em>Engineer II</em></div>
+      <ul class="exp-bullets">
+        <li>Engineered Jio HCMP — an in-house automation platform — reducing manual workload by 40% and improving operational efficiency across teams.</li>
+        <li>Contributed to IAASDB, Kubernetes, and OpenShift cluster creation, specialising in MACD processes.</li>
+        <li>Designed and implemented Python FastAPI services using OOP principles with Oracle SQL as primary database.</li>
+        <li>Automated cloud provisioning using Terraform and Ansible, reducing deployment time by 50%.</li>
+        <li>Built Docker images via Azure DevOps and deployed across Dev, Staging, and Production stages.</li>
+        <li>Configured AWS services (EC2, S3, RDS, IAM, VPC, ALB, Lambda) for scalable application deployment.</li>
+      </ul>
+      <div class="tags"><span class="tag tb">Kubernetes</span><span class="tag tb">OpenShift</span><span class="tag tg">Terraform</span><span class="tag tg">Ansible</span><span class="tag tg">Docker</span><span class="tag to">FastAPI</span><span class="tag to">Airflow</span><span class="tag tb">Azure DevOps</span></div>
+    </div>
+  </div></div>
+
+  <div class="reveal"><div class="exp-item" style="border-bottom:none">
+    <div><div class="exp-period">Feb 2020 – Sep 2022</div><div class="exp-company">Cognizant Technology Solutions</div><div class="exp-type">Full-time</div></div>
+    <div>
+      <div class="exp-role">Infrastructure Automation <em>Developer</em></div>
+      <ul class="exp-bullets">
+        <li>Engineered enterprise IT automation tool (CAC) integrated with StackStorm, using ML to resolve tickets from Outlook/ticketing tools by triggering automated scripts.</li>
+        <li>Designed and deployed automation solutions across multiple enterprise accounts, saving 20–30 hours of manual work per week.</li>
+        <li>Enhanced system reliability by 35% and reduced script failures by 60% through resilient exception handling and structured error logging.</li>
+        <li>Managed code repositories with Git across GitHub and Azure Repo; strong Python library expertise (Paramiko, Flask, Pandas, Requests, NumPy).</li>
+      </ul>
+      <div class="tags"><span class="tag tb">StackStorm</span><span class="tag tg">Python</span><span class="tag tg">Robot Framework</span><span class="tag to">PowerShell</span><span class="tag to">Bash</span><span class="tag tb">Flask</span></div>
+    </div>
+  </div></div>
+</section>
+
+<section id="projects">
+  <div class="sec-label reveal"><span class="sec-num">02 /</span><h2 class="sec-title">Key Projects</h2><div class="sec-rule"></div></div>
+  <div class="proj-grid">
+    <div class="proj-card reveal"><div class="proj-cloud">Azure · Event-Driven</div><div class="proj-title">Cloud Automation & Event-Driven Architecture</div><div class="proj-desc">Loosely coupled microservices using Azure Functions, Service Bus, Logic Apps, Blob Storage, and Key Vault for secure automated workflows.</div><div class="proj-impact">▸ Improved fault tolerance via async messaging</div><div class="tags"><span class="tag tb">Azure Functions</span><span class="tag tb">Service Bus</span><span class="tag to">Logic Apps</span><span class="tag tg">Key Vault</span></div></div>
+    <div class="proj-card reveal"><div class="proj-cloud">AWS · IaC</div><div class="proj-title">Cloud Infrastructure Automation & Optimisation</div><div class="proj-desc">Modular, reusable Terraform for multi-account and multi-region AWS. Cost optimisation strategies and remote state via S3 + DynamoDB.</div><div class="proj-impact">▸ Consistent deployments across Dev / Staging / Prod</div><div class="tags"><span class="tag tg">Terraform</span><span class="tag tb">EC2</span><span class="tag tb">S3</span><span class="tag to">DynamoDB</span></div></div>
+    <div class="proj-card reveal"><div class="proj-cloud">Jio Platforms · Internal</div><div class="proj-title">Jio HCMP — Automation Platform</div><div class="proj-desc">End-to-end hybrid cloud management platform integrating Kubernetes / OpenShift cluster management, Python FastAPI backend, and Airflow orchestration.</div><div class="proj-impact">▸ 40% reduction in manual workload across teams</div><div class="tags"><span class="tag tg">Python</span><span class="tag to">FastAPI</span><span class="tag tb">Kubernetes</span><span class="tag to">Airflow</span></div></div>
+    <div class="proj-card reveal"><div class="proj-cloud">Cognizant · Enterprise AI</div><div class="proj-title">CAC — Enterprise IT Automation Tool</div><div class="proj-desc">ML-integrated ITPA system using StackStorm backend. Auto-resolves incidents from ticketing tools / Outlook by triggering targeted automation scripts.</div><div class="proj-impact">▸ 20–30 hrs/week saved · reliability up 35%</div><div class="tags"><span class="tag tb">StackStorm</span><span class="tag tg">Robot Framework</span><span class="tag to">PowerShell</span><span class="tag tg">Python</span></div></div>
+    <div class="proj-card reveal"><div class="proj-cloud">AWS · Serverless</div><div class="proj-title">Automated EC2 Cost Management</div><div class="proj-desc">Serverless Lambda + EventBridge to schedule EC2 shutdowns with SNS email alerts. IAM roles enforced for least-privilege access.</div><div class="proj-impact">▸ Measurable reduction in AWS compute costs</div><div class="tags"><span class="tag tb">Lambda</span><span class="tag to">EventBridge</span><span class="tag tb">SNS</span><span class="tag tg">IAM</span></div></div>
+    <div class="proj-card reveal"><div class="proj-cloud">Multi-Cloud · CI/CD</div><div class="proj-title">Infrastructure as Code Pipeline</div><div class="proj-desc">Terraform + Ansible automation pipelines integrated with Azure DevOps CI/CD. Multi-environment Docker image builds and deployments.</div><div class="proj-impact">▸ 50% reduction in deployment time</div><div class="tags"><span class="tag tg">Terraform</span><span class="tag tg">Ansible</span><span class="tag tb">Azure DevOps</span><span class="tag to">Docker</span></div></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-label reveal"><span class="sec-num">03 /</span><h2 class="sec-title">Skills</h2><div class="sec-rule"></div></div>
+  <div class="skill-grid">
+    <div class="skill-card reveal"><div class="skill-cat">Cloud Platforms</div><div class="skill-pills"><span class="skill-pill">AWS</span><span class="skill-pill">Azure</span><span class="skill-pill">GCP</span><span class="skill-pill">OpenStack</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">Infrastructure as Code</div><div class="skill-pills"><span class="skill-pill">Terraform</span><span class="skill-pill">Ansible</span><span class="skill-pill">CloudFormation</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">Containers & Orchestration</div><div class="skill-pills"><span class="skill-pill">Docker</span><span class="skill-pill">Kubernetes</span><span class="skill-pill">OpenShift</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">Languages</div><div class="skill-pills"><span class="skill-pill">Python</span><span class="skill-pill">Bash</span><span class="skill-pill">PowerShell</span><span class="skill-pill">YAML</span><span class="skill-pill">Robot Framework</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">CI/CD & Version Control</div><div class="skill-pills"><span class="skill-pill">Jenkins</span><span class="skill-pill">Azure DevOps</span><span class="skill-pill">GitHub Actions</span><span class="skill-pill">Git</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">Azure Services</div><div class="skill-pills"><span class="skill-pill">Azure Functions</span><span class="skill-pill">Service Bus</span><span class="skill-pill">Key Vault</span><span class="skill-pill">Logic Apps</span><span class="skill-pill">Blob Storage</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">Databases</div><div class="skill-pills"><span class="skill-pill">MySQL</span><span class="skill-pill">PostgreSQL</span><span class="skill-pill">Oracle SQL</span><span class="skill-pill">DynamoDB</span></div></div>
+    <div class="skill-card reveal"><div class="skill-cat">Python Libraries</div><div class="skill-pills"><span class="skill-pill">FastAPI</span><span class="skill-pill">Flask</span><span class="skill-pill">Paramiko</span><span class="skill-pill">Pandas</span><span class="skill-pill">Requests</span><span class="skill-pill">NumPy</span></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-label reveal"><span class="sec-num">04 /</span><h2 class="sec-title">Get in Touch</h2><div class="sec-rule"></div></div>
+  <div class="contact-wrap">
+    <div class="reveal">
+      <p class="contact-intro">Always open to interesting SRE, Cloud, or DevOps opportunities — whether it's a project, collaboration, or just a conversation about infrastructure and automation. Feel free to reach out.</p>
+      <div class="terminal" style="max-width:360px">
+        <div class="term-bar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><div class="term-title">status</div></div>
+        <div class="term-body" style="font-size:.74rem;line-height:1.9">
+          <div><span class="tk">status</span>: <span style="color:var(--green)">open_to_work</span></div>
+          <div><span class="tk">location</span>: <span class="tv">India (Remote OK)</span></div>
+          <div><span class="tk">focus</span>: <span class="tv">SRE / Cloud / DevOps</span></div>
+          <div><span class="tk">response</span>: <span class="tv">&lt; 24 hours</span></div>
         </div>
-    </header>
+      </div>
+    </div>
+    <div class="clinks reveal">
+      <a href="mailto:chetanpinjarkar@gmail.com" class="clink"><div class="clink-icon">✉️</div><div><span class="clink-label">Email</span><span class="clink-val">chetanpinjarkar@gmail.com</span></div><span class="clink-arrow">→</span></a>
+      <a href="https://www.linkedin.com/in/chetan-pinjarkar-b1253335/" target="_blank" class="clink"><div class="clink-icon">💼</div><div><span class="clink-label">LinkedIn</span><span class="clink-val">linkedin.com/in/chetan-pinjarkar</span></div><span class="clink-arrow">→</span></a>
+      <a href="https://chetanpinjarkar.github.io/" target="_blank" class="clink"><div class="clink-icon">🔗</div><div><span class="clink-label">GitHub Portfolio</span><span class="clink-val">chetanpinjarkar.github.io</span></div><span class="clink-arrow">→</span></a>
+      <a href="tel:+919970399336" class="clink"><div class="clink-icon">📱</div><div><span class="clink-label">Phone</span><span class="clink-val">+91 9970399336</span></div><span class="clink-arrow">→</span></a>
+    </div>
+  </div>
+</section>
 
-    <section class="section">
-        <h2>Summary</h2>
-        <p>Senior Software Engineer with expertise in Python development, automation, and cloud technologies. Skilled in Kubernetes, Ansible, and database management, with a strong focus on optimizing workflows and automating repetitive tasks. Passionate about problem-solving and continuous learning, with experience in building scalable and efficient systems. Dedicated to delivering high-quality solutions that enhance productivity and streamline processes.</p>
-    </section>
+<footer>
+  <p>© 2025 <span>Chetan Pinjarkar</span>. Built for GitHub Pages.</p>
+  <p>SRE · Cloud · DevOps · <span>Python</span></p>
+</footer>
 
-    <section class="section">
-        <h2>Experience</h2>
-        <h3>Sandhata Technologies - Cloud Engineer (Apr 2025 - Present)</h3>
-        <ul>
-            <li>Working on building event-driven and cloud-native solutions using Azure services.</li>
-            <li>Developing automation workflows using Python, Azure Functions, Service Bus, Logic Apps, and Blob Storage.</li>
-            <li>Integrating REST APIs with secure authentication and implementing robust error handling and logging.</li>
-            <li>Designing and managing AWS infrastructure using Terraform (IaC), including VPC, EC2, ALB, RDS, and S3.</li>
-            <li>Developing reusable Terraform modules for scalable, multi-environment deployments.</li>
-            <li>Implementing infrastructure automation and deployment strategies to improve efficiency and reliability.</li>
-            <li>Working with CI/CD pipelines and supporting cloud deployment and configuration activities.</li>
-            <li>Collaborating with cross-functional teams to ensure smooth integration, deployment, and system performance.</li>
-        </ul>
-        
-        <h3>JIO Platform Ltd - Python Backend Developer (Sep 2022 - April 2025)</h3>
-        <ul>
-            <li>Worked on the in-house JIO Automation tool - HCMP, automating recurring tasks.</li>
-            <li>Designed and developed automation scripts using Python, Bash scripting, PowerShell, and Robot Framework.</li>
-            <li>Utilized Airflow for task monitoring, dependency management, and issue troubleshooting.</li>
-            <li>Contributed to IaaSDB, Kubernetes (k8s), and OpenShift cluster creation and management.</li>
-            <li>Designed and implemented a Python Fast API using OOP principles for seamless integration.</li>
-            <li>Built Docker images using Azure DevOps and deployed them across multiple environments.</li>
-            <li>Collaborated with QA and DevOps teams to ensure robust deployment and monitoring of automation scripts.</li>
-            <li>Proficient in version control systems like Git and CI/CD pipelines using Azure DevOps.</li>
-            <li>Worked with cloud services such as Azure DevOps, OpenStack, AWS, and Google Cloud.</li>
-        </ul>
-
-        <h3>Cognizant Technology Solutions - RPA Developer (Feb 2020 - Sep 2022)</h3>
-        <ul>
-            <li>Worked on Enterprise IT Automation tool - Cognizant Automation Center, integrated with StackStorm.</li>
-            <li>Developed Python, PowerShell, and Robot Framework-based automation solutions, saving 20-30 hours of manual work per week for multiple accounts.</li>
-            <li>Gathered and analyzed stakeholder requirements, documenting processes and implementing automation solutions.</li>
-            <li>Built robust exception handling and error logging mechanisms to enhance script reliability.</li>
-            <li>Proficient in Python libraries like Paramiko, winrm, Flask, Pandas, Requests, and more.</li>
-            <li>Experienced in building and consuming APIs using Python.</li>
-        </ul>
-    </section>
-
-    <section class="section">
-        <h2>Skills Summary</h2>
-        <ul>
-            <li><strong>Languages:</strong> Python, Bash Scripting, Robot Framework, YAML</li>
-            <li><strong>Containerization Tools:</strong> Docker, Kubernetes</li>
-            <li><strong>Database:</strong> PostgreSQL, MySQL</li>
-            <li><strong>Operating Systems:</strong> Linux, Windows</li>
-            <li><strong>Version Control Tools:</strong> Azure Repo, Git</li>
-            <li><strong>CI/CD Tools:</strong> Jenkins, Ansible</li>
-            <li><strong>Cloud Technology:</strong> Azure DevOps, OpenStack Cloud, AWS, Google Cloud</li>
-        </ul>
-    </section>
-
-    <section class="section">
-        <h2>Education</h2>
-        <p>Bachelor of Engineering (BE) in Computer Science and Engineering, Sant Gadge Baba Amravati University</p>
-    </section>
-
-    <section class="section">
-        <h2>Extra-Curricular Activities</h2>
-        <ul>
-            <li>Won a top prize in Open Contest - Code Gladiators.</li>
-            <li>Volunteered for wall painting and tree plantation events with PRMITR Team.</li>
-        </ul>
-    </section>
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible') }), {threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.skill-grid .reveal,.proj-grid .reveal').forEach((el,i) => { el.style.transitionDelay = (i*.07)+'s'; });
+</script>
 </body>
 </html>
-
