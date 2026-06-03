@@ -27,7 +27,9 @@
     .nav-links a:hover{color:var(--text)}
 
     .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 5vw 4rem;position:relative;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(79,156,249,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,156,249,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 20% 50%,black,transparent);mask-image:radial-gradient(ellipse 70% 70% at 20% 50%,black,transparent)}
+    .hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .hero-bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.13}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 80% at 15% 50%,transparent 30%,var(--bg) 75%)}
     .hero-content{position:relative;z-index:1;max-width:800px}
 
     .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .75rem;border-radius:20px;background:var(--adim);border:1px solid rgba(79,156,249,.25);font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.06em;margin-bottom:1.6rem;opacity:0;animation:fadeUp .5s ease .1s forwards}
@@ -145,7 +147,85 @@
 </nav>
 
 <section class="hero" id="about" style="border-top:none;">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="smallgrid" width="28" height="28" patternUnits="userSpaceOnUse">
+          <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#4f9cf9" stroke-width="0.4"/>
+        </pattern>
+        <pattern id="grid" width="112" height="112" patternUnits="userSpaceOnUse">
+          <rect width="112" height="112" fill="url(#smallgrid)"/>
+          <path d="M 112 0 L 0 0 0 112" fill="none" stroke="#4f9cf9" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <!-- base grid -->
+      <rect width="100%" height="100%" fill="url(#grid)" />
+
+      <!-- horizontal circuit traces -->
+      <g stroke="#4f9cf9" stroke-width="1.5" fill="none">
+        <polyline points="0,140 180,140 220,180 400,180 440,140 650,140"/>
+        <polyline points="200,280 340,280 380,240 560,240 600,280 820,280 860,240 1050,240"/>
+        <polyline points="0,420 100,420 140,380 320,380 360,420 580,420"/>
+        <polyline points="700,500 840,500 880,460 1100,460 1140,500 1200,500"/>
+        <polyline points="0,560 150,560 190,520 410,520 450,560 680,560 720,520 900,520"/>
+        <polyline points="300,350 420,350 460,310 640,310 680,350 850,350"/>
+      </g>
+
+      <!-- vertical connectors -->
+      <g stroke="#4f9cf9" stroke-width="1.5" fill="none">
+        <line x1="220" y1="180" x2="220" y2="280"/>
+        <line x1="560" y1="240" x2="560" y2="310"/>
+        <line x1="380" y1="240" x2="380" y2="180"/>
+        <line x1="140" y1="380" x2="140" y2="420"/>
+        <line x1="840" y1="460" x2="840" y2="500"/>
+        <line x1="680" y1="350" x2="680" y2="420"/>
+        <line x1="450" y1="520" x2="450" y2="560"/>
+        <line x1="190" y1="520" x2="190" y2="560"/>
+        <line x1="860" y1="240" x2="860" y2="280"/>
+        <line x1="640" y1="310" x2="640" y2="280"/>
+      </g>
+
+      <!-- nodes / solder points -->
+      <g fill="#4f9cf9">
+        <circle cx="220" cy="180" r="3.5"/><circle cx="400" cy="180" r="3.5"/>
+        <circle cx="380" cy="240" r="3.5"/><circle cx="560" cy="240" r="3.5"/>
+        <circle cx="220" cy="280" r="3.5"/><circle cx="600" cy="280" r="3.5"/>
+        <circle cx="140" cy="380" r="3.5"/><circle cx="320" cy="380" r="3.5"/>
+        <circle cx="140" cy="420" r="3.5"/><circle cx="360" cy="420" r="3.5"/>
+        <circle cx="460" cy="310" r="3.5"/><circle cx="640" cy="310" r="3.5"/>
+        <circle cx="680" cy="350" r="3.5"/><circle cx="680" cy="420" r="3.5"/>
+        <circle cx="840" cy="460" r="3.5"/><circle cx="1100" cy="460" r="3.5"/>
+        <circle cx="840" cy="500" r="3.5"/><circle cx="860" cy="240" r="3.5"/>
+        <circle cx="190" cy="520" r="3.5"/><circle cx="410" cy="520" r="3.5"/>
+        <circle cx="450" cy="560" r="3.5"/><circle cx="720" cy="520" r="3.5"/>
+        <circle cx="640" cy="280" r="3.5"/><circle cx="860" cy="280" r="3.5"/>
+      </g>
+
+      <!-- IC chip shapes -->
+      <g stroke="#4f9cf9" stroke-width="1" fill="rgba(79,156,249,0.06)">
+        <rect x="460" y="160" width="80" height="56" rx="3"/>
+        <rect x="720" y="300" width="100" height="64" rx="3"/>
+        <rect x="240" y="390" width="72" height="48" rx="3"/>
+        <rect x="920" y="420" width="88" height="60" rx="3"/>
+        <rect x="100" y="500" width="66" height="44" rx="3"/>
+      </g>
+      <!-- chip pin lines -->
+      <g stroke="#4f9cf9" stroke-width="1">
+        <line x1="460" y1="176" x2="440" y2="176"/><line x1="460" y1="192" x2="440" y2="192"/>
+        <line x1="460" y1="208" x2="440" y2="208"/>
+        <line x1="540" y1="176" x2="560" y2="176"/><line x1="540" y1="192" x2="560" y2="192"/>
+        <line x1="540" y1="208" x2="560" y2="208"/>
+        <line x1="720" y1="316" x2="700" y2="316"/><line x1="720" y1="332" x2="700" y2="332"/>
+        <line x1="820" y1="316" x2="840" y2="316"/><line x1="820" y1="332" x2="840" y2="332"/>
+      </g>
+
+      <!-- bright accent nodes (slightly larger, more visible) -->
+      <g fill="#4f9cf9" opacity="0.9">
+        <circle cx="500" cy="188" r="5"/><circle cx="770" cy="332" r="5"/>
+        <circle cx="276" cy="414" r="5"/><circle cx="964" cy="450" r="5"/>
+      </g>
+    </svg>
+  </div>
   <div class="hero-content">
     <div class="badge"><span class="badge-dot"></span>Available for opportunities</div>
     <h1 class="hero-name">
