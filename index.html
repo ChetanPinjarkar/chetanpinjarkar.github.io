@@ -131,7 +131,32 @@
       .contact-wrap{grid-template-columns:1fr;gap:2rem}
       footer{flex-direction:column;gap:.4rem;text-align:center;padding:1.2rem}
     }
-  </style>
+
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+    .cert-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.5rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;gap:.75rem}
+    .cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+    .cert-card.k8s::before{background:linear-gradient(90deg,#4f9cf9,#34d399)}
+    .cert-card.ansible::before{background:linear-gradient(90deg,#fb923c,#ef4444)}
+    .cert-card.jio::before{background:linear-gradient(90deg,#a78bfa,#4f9cf9)}
+    .cert-card.python::before{background:linear-gradient(90deg,#fbbf24,#34d399)}
+    .cert-card.devops::before{background:linear-gradient(90deg,#34d399,#4f9cf9)}
+    .cert-card:hover{border-color:#2d3a50;transform:translateY(-3px)}
+    .cert-card:hover::before{transform:scaleX(1)}
+    .cert-top{display:flex;align-items:flex-start;gap:.85rem}
+    .cert-icon{width:40px;height:40px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;letter-spacing:-.01em;text-align:center;line-height:1.2}
+    .cert-icon.k8s{background:rgba(79,156,249,.12);color:#4f9cf9;border:1px solid rgba(79,156,249,.25)}
+    .cert-icon.ansible{background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.25)}
+    .cert-icon.jio{background:rgba(167,139,250,.12);color:#a78bfa;border:1px solid rgba(167,139,250,.25)}
+    .cert-icon.python{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
+    .cert-icon.devops{background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.25)}
+    .cert-meta{flex:1;min-width:0}
+    .cert-provider{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem}
+    .cert-name{font-size:.925rem;font-weight:700;color:var(--text);line-height:1.35}
+    .cert-footer{display:flex;align-items:center;justify-content:space-between}
+    .cert-date{font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.04em}
+    .cert-badge{font-family:var(--mono);font-size:.6rem;padding:.18rem .55rem;border-radius:20px;letter-spacing:.04em;font-weight:600}
+    .cert-badge.valid{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.25)}
+    </style>
 </head>
 <body>
 
@@ -345,8 +370,85 @@
   </div>
 </section>
 
+<section id="certifications">
+  <div class="sec-label reveal"><span class="sec-num">04 /</span><h2 class="sec-title">Certifications</h2><div class="sec-rule"></div></div>
+  <div class="cert-grid">
+
+    <div class="cert-card k8s reveal">
+      <div class="cert-top">
+        <div class="cert-icon k8s">CK<br>AD</div>
+        <div class="cert-meta">
+          <div class="cert-provider">LearnKartS</div>
+          <div class="cert-name">Certified Kubernetes Application Developer</div>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-date">Issued: Mar 2025</span>
+        <span class="cert-badge valid">● Valid</span>
+      </div>
+    </div>
+
+    <div class="cert-card ansible reveal">
+      <div class="cert-top">
+        <div class="cert-icon ansible">ANS</div>
+        <div class="cert-meta">
+          <div class="cert-provider">Whizlabs</div>
+          <div class="cert-name">Automation with Ansible</div>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-date">Issued: Jan 2025</span>
+        <span class="cert-badge valid">● Valid</span>
+      </div>
+    </div>
+
+    <div class="cert-card jio reveal">
+      <div class="cert-top">
+        <div class="cert-icon jio">JPL</div>
+        <div class="cert-meta">
+          <div class="cert-provider">Jio Platforms Limited</div>
+          <div class="cert-name">IT Architect Fundamental</div>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-date">Issued: Mar 2025</span>
+        <span class="cert-badge valid">● Valid</span>
+      </div>
+    </div>
+
+    <div class="cert-card python reveal">
+      <div class="cert-top">
+        <div class="cert-icon python">PY</div>
+        <div class="cert-meta">
+          <div class="cert-provider">Udemy</div>
+          <div class="cert-name">Complete Python Programming Masterclass — Beginner to Advanced</div>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-date">Issued: Nov 2021</span>
+        <span class="cert-badge valid">● Valid</span>
+      </div>
+    </div>
+
+    <div class="cert-card devops reveal">
+      <div class="cert-top">
+        <div class="cert-icon devops">CI<br>CD</div>
+        <div class="cert-meta">
+          <div class="cert-provider">Udemy</div>
+          <div class="cert-name">DevOps, CI/CD — Continuous Integration &amp; Delivery for Beginners</div>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-date">Issued: Nov 2021</span>
+        <span class="cert-badge valid">● Valid</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section id="contact">
-  <div class="sec-label reveal"><span class="sec-num">04 /</span><h2 class="sec-title">Get in Touch</h2><div class="sec-rule"></div></div>
+  <div class="sec-label reveal"><span class="sec-num">05 /</span><h2 class="sec-title">Get in Touch</h2><div class="sec-rule"></div></div>
   <div class="contact-wrap">
     <div class="reveal">
       <p class="contact-intro">Always open to interesting SRE, Cloud, or DevOps opportunities — whether it's a project, collaboration, or just a conversation about infrastructure and automation. Feel free to reach out.</p>
